@@ -21,8 +21,8 @@ class ProductsService {
     }
     const { limit, offset } = query;
     if (limit && offset) {
-      options.limit =  limit;
-      options.offset =  offset;
+      options.limit = limit;
+      options.offset = offset;
     }
 
     const { price } = query;
@@ -61,6 +61,10 @@ class ProductsService {
     const product = await this.findOne(id);
     await product.destroy();
     return { id };
+  }
+
+  async getByCategory(id) {
+    return await models.Product.findAll({ where: { categoryId: id } });
   }
 
 }
